@@ -14,23 +14,19 @@ const TeamSection = () => {
   const teamMembers = [
     {
       name: 'Rohith Sheregar',
-      role: 'Project Lead',
-      description: 'Satellite imagery analysis, machine learning algorithms and system integration.',
+      role: '',
     },
     {
       name: 'Nishith R Poojary',
-      role: 'Data Engineer',
-      description: 'AIS data processing and real-time data fusion pipeline development.',
+      role: '',
     },
     {
-      name: 'Reynol D\'Souza',
-      role: 'Systems Architect',
-      description: 'System design, backend infrastructure and deployment.',
+      name: "Reynol D'Souza",
+      role: '',
     },
     {
       name: 'Prajwal Shanbhag',
-      role: 'Research Analyst',
-      description: 'Environmental impact assessment and result validation.',
+      role: '',
     },
   ];
 
@@ -60,9 +56,9 @@ const TeamSection = () => {
         <ScrollReveal>
           <div className="mb-16">
             <span className="section-label">Our Team</span>
-            <h2 className="section-title mt-4 mb-4">Meet the Researchers</h2>
+            <h2 className="section-title mt-4 mb-4">Meet the Developers</h2>
             <p className="text-foreground/70 max-w-2xl text-lg leading-relaxed">
-              A dedicated team of engineers and researchers working to advance environmental monitoring technology.
+              A dedicated team of students working together to create simple and effective solutions for environmental monitoring.
             </p>
           </div>
         </ScrollReveal>
