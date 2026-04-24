@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import ScrollReveal from '../components/ScrollReveal';
-import { Mail, MapPin, Calendar } from 'lucide-react';
+import { motion } from "framer-motion";
+import ScrollReveal from "../components/ScrollReveal";
+import { Mail, MapPin, Calendar } from "lucide-react";
 
 /**
  * ContactSection Component
@@ -14,7 +14,10 @@ const ContactSection = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <section id="contact" className="py-20 bg-background border-t border-border">
+    <section
+      id="contact"
+      className="py-20 bg-background border-t border-border"
+    >
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="mb-16 text-center">
@@ -30,18 +33,64 @@ const ContactSection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, margin: "-100px" }}
           >
             <div className="inline-flex p-3 rounded-md bg-accent/10 mb-4">
               <Mail className="text-accent" size={24} />
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">Email</h3>
-            <a
-              href="mailto:project@university.edu"
-              className="text-accent hover:text-accent/80 transition-colors"
-            >
-              project@university.edu
-            </a>
+
+            <h3 className="text-lg font-semibold text-foreground mb-4">
+              Contact Emails
+            </h3>
+
+            <div className="space-y-2 text-accent">
+              <a
+                href="mailto:reynol.23cs119@sode-edu.in"
+                className="block hover:underline"
+              >
+                reynol.23cs119@sode-edu.in
+              </a>
+              <a
+                href="mailto:rohith.23cs120@sode-edu.in"
+                className="block hover:underline"
+              >
+                rohith.23cs120@sode-edu.in
+              </a>
+              <a
+                href="mailto:nishith.23cs087@sode-edu.in"
+                className="block hover:underline"
+              >
+                nishith.23cs087@sode-edu.in
+              </a>
+              <a
+                href="mailto:prajwal.23cs095@sode-edu.in"
+                className="block hover:underline"
+              >
+                prajwal.23cs095@sode-edu.in
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <div className="inline-flex p-3 rounded-md bg-accent/10 mb-4">
+              <Calendar className="text-accent" size={24} />
+            </div>
+
+            <h3 className="text-lg font-semibold text-foreground mb-2">
+              Guide
+            </h3>
+
+            <p className="text-foreground/70">
+              Mrs. Preethi M
+              <br />
+              Project Guide
+            </p>
           </motion.div>
 
           {/* Institution */}
@@ -49,34 +98,22 @@ const ContactSection = () => {
             className="text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true, margin: "-100px" }}
           >
             <div className="inline-flex p-3 rounded-md bg-accent/10 mb-4">
               <MapPin className="text-accent" size={24} />
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">Institution</h3>
-            <p className="text-foreground/70">
-              Department of Computer Science &amp; Engineering<br />
-              SMVITM - Shri Madhwa Vadhiraja Institute of Technology &amp; Management
-            </p>
-          </motion.div>
 
-          {/* Defense Date */}
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            <div className="inline-flex p-3 rounded-md bg-accent/10 mb-4">
-              <Calendar className="text-accent" size={24} />
-            </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">Defense</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-2">
+              Institution
+            </h3>
+
             <p className="text-foreground/70">
-              Spring {currentYear}<br />
-              Final Year Project
+              Department of Computer Science &amp; Engineering
+              <br />
+              SMVITM - Shri Madhwa Vadhiraja Institute of Technology &amp;
+              Management
             </p>
           </motion.div>
         </div>
@@ -96,7 +133,7 @@ const ContactSection = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true, margin: "-100px" }}
         >
           <p className="text-foreground/60 text-sm mb-2">
             Automated Detection and Vessel Attribution of Illegal Bilge Dumping
