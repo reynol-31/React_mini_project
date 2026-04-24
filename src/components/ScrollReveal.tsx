@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
 /**
@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
  */
 
 interface ScrollRevealProps {
-  children: React.ReactNode;
+  children: ReactNode;
   delay?: number;
   className?: string;
   direction?: 'up' | 'down' | 'left' | 'right';
