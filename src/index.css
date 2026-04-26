@@ -44,13 +44,13 @@
 
 :root {
   /* Scientific Minimalism Color Palette */
-  --primary: #0A192F; /* Deep Navy */
+  --primary: #000000; /* Deep Black */
   --primary-foreground: #CCD6F6; /* Soft Light Blue */
   --secondary: #112240; /* Secondary Navy */
   --secondary-foreground: #CCD6F6;
   --accent: #64FFDA; /* Teal Highlight */
-  --accent-foreground: #0A192F;
-  --background: #0A192F; /* Deep Navy Background */
+  --accent-foreground: #000000;
+  --background: #000000; /* Pure Black Background */
   --foreground: #CCD6F6; /* Soft Light Blue Text */
   --card: #112240; /* Card Background */
   --card-foreground: #CCD6F6;
@@ -83,11 +83,11 @@
 
 .dark {
   /* Dark theme uses same scientific palette */
-  --primary: #0A192F;
+  --primary: #000000;
   --primary-foreground: #CCD6F6;
   --sidebar-primary: #64FFDA;
-  --sidebar-primary-foreground: #0A192F;
-  --background: #0A192F;
+  --sidebar-primary-foreground: #000000;
+  --background: #000000;
   --foreground: #CCD6F6;
   --card: #112240;
   --card-foreground: #CCD6F6;
@@ -132,26 +132,32 @@
   }
   
   .display-title {
-    font-family: 'Sora', sans-serif;
-    font-size: 3.5rem;
-    font-weight: 700;
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    font-weight: 600;
     line-height: 1.1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.5);
   }
   
   .section-title {
-    font-family: 'Sora', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
     line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
   
   .section-label {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    font-weight: 400;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--accent);
+    opacity: 0.9;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
