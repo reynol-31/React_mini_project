@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
 /**
@@ -11,16 +11,22 @@ import { ChevronDown } from 'lucide-react';
  */
 
 const HeroSection = () => {
-  const [scrollY, setScrollY] = useState(0);
+  const targetRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end start"]
+  });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Zoom the globe continuously over the pinned duration
+  const globeScale = useTransform(scrollYProgress, [0, 0.66], [1, 15]);
+  
+  // Crossfade the entire HeroSection directly into Scene 1 while it is fully pinned
+  const sectionOpacity = useTransform(scrollYProgress, [0.4, 0.66], [1, 0]);
+  
+  const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
+  const indicatorOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -32,24 +38,31 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
+      ref={targetRef}
+      className="relative h-[300vh] z-20 -mb-[200vh]"
     >
-      {/* Parallax Background */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: 'url(https://d2xsxph8kpxj0f.cloudfront.net/310519663592621201/jqQFNHoPFFCeNM8Dc6umSg/hero-satellite-ocean-Fmc9NpdWP3pu3Hz9kVFhEJ.webp)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          y: scrollY * 0.5,
-        }}
-      />
+      <motion.div 
+        className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden pt-16 bg-background"
+        style={{ opacity: sectionOpacity }}
+      >
+        {/* Spline 3D Background - Positioned at the bottom, showing only the upper half */}
+        <motion.div 
+          className="absolute inset-0 z-0 overflow-hidden origin-bottom"
+          style={{ scale: globeScale }}
+          onWheelCapture={(e) => e.stopPropagation()}
+          onTouchMoveCapture={(e) => e.stopPropagation()}
+        >
+          <div className="absolute top-[100%] left-1/2 w-[100vw] h-[100vh] -translate-x-1/2 -translate-y-1/2 scale-[1] origin-center">
+            {/* @ts-ignore */}
+            <spline-viewer url="https://prod.spline.design/mV83ATYGalfUFdZD/scene.splinecode"></spline-viewer>
+          </div>
+        </motion.div>
 
-      {/* Overlay Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background z-10" />
-
-      {/* Content */}
-      <div className="container relative z-20 mx-auto px-4 text-center">
+        {/* Content (Moved to higher z-index so text overlays everything) */}
+        <motion.div 
+          className="container relative z-40 mx-auto px-4 text-center pointer-events-none mb-24"
+          style={{ opacity: textOpacity, y: textY }}
+        >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -68,36 +81,17 @@ const HeroSection = () => {
         >
           Automated Detection and Vessel Attribution of Illegal Bilge Dumping
         </motion.h1>
+        </motion.div>
 
-        <motion.p
-          className="text-xl text-foreground/80 mb-8 max-w-2xl mx-auto leading-relaxed"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+        {/* Scroll Indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          style={{ opacity: indicatorOpacity }}
         >
-          Using Sentinel-1 SAR and AIS Data Fusion for Real-Time Environmental Monitoring
-        </motion.p>
-
-        <motion.button
-          onClick={() => scrollToSection('overview')}
-          className="inline-flex items-center gap-2 px-8 py-3 bg-accent text-primary font-semibold rounded-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Explore System
-        </motion.button>
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <ChevronDown className="text-accent" size={32} />
+          <ChevronDown className="text-accent" size={32} />
+        </motion.div>
       </motion.div>
     </section>
   );
